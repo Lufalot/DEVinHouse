@@ -1,0 +1,3 @@
+https://qastack.com.br/programming/5529718/how-to-detect-internet-speed-in-javascript
+https://wicg.github.io/netinfo/
+https://caniuse.com/netinfo
