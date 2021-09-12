@@ -6,7 +6,7 @@ function dadosProduto(codigo) {
         cor = 'Vermelho';
     } else if (cor === '002') {
         cor = 'Preto';
-    } else if (cor == '003') {
+    } else if (cor === '003') {
         cor = 'Amarelo';
     } else { cor = 'Indefinida.'; }
     let voltagem = codigo.substr(8,1);
@@ -21,4 +21,4 @@ function mostrarDados() {
     let codigo = document.getElementById('codigo').value;
     let produto = dadosProduto(codigo);
     alert(`Produto: ${codigo}\nModelo: ${produto[0]}\nLote: ${produto[1]}\nCor: ${produto[2]}\nVoltagem: ${produto[3]}`);
-    }
+}
