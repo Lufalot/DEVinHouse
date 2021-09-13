@@ -9,23 +9,15 @@ const estacao = () => {
         primavera = { inicio: new Date(ano+'-9-22').getTime(), fim: new Date(ano+'-12-21').getTime() };
     
         if (data >= verao.inicio && data <= verao.fim) {
-            document.body.style.backgroundImage = "url('img/verao.jpg')";
-            texto.textContent = "Estamos no verão";
             return 'verao';
         }
         if (data >= outono.inicio && data <= outono.fim) {
-            document.body.style.backgroundImage = "url('img/outono.jpg')";
-            texto.textContent = "Estamos no outono";
             return 'outono';
         }
         if (data >= inverno.inicio && data <= inverno.fim) {
-            document.body.style.backgroundImage = "url('img/inverno.jpg')";
-            texto.textContent = "Estamos no inverno";
             return 'inverno';
         }
         if (data >= primavera.inicio && data <= primavera.fim) {
-            document.body.style.backgroundImage = "url('img/primavera.jpg')";
-            texto.textContent = "Estamos na primavera";
             return 'primavera';
         }
 }
