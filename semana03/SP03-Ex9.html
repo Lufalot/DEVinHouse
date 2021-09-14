@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="css/SP03-Ex9.css">-->
+    <title>DEVinHouse</title>
+</head>
+<body>
+    <header>
+        <h1>Semana 03 - Exercício 09</h1>
+        <hr>
+    </header>
+    <main>
+        <section>
+            <div id="inputItem">
+                <label for="adicionar">Item a adicionar:</label>
+                <input id="adicionar" type="text">
+                <button id="addButton" onclick="adicionarItem(adicionar.value)">Adicionar</button>
+                <button onclick="salvarLista()">Salvar Lista</button>
+                <button onclick="carregarLista()">Carregar Lista</button>
+                <button onclick="limparLista()">Limpar Lista</button>
+            </div>
+            <div>
+                <ul id="lista">
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="js/SP03-Ex9.js"></script>
+</body>
+</html>
