@@ -61,5 +61,3 @@ function limparLista() {
     document.getElementById('lista').innerHTML = '';
     listaStore = [];
 }
-
-console.log(JSON.stringify(listaStore));

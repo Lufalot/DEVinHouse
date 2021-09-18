@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../devinhouse.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <title>Lista de Tarefas - DEVinHouse</title>
+</head>
+<body onload="carregarLista()">
+    <header>
+        <h1>Lista de Tarefas</h1>
+    </header>
+    <main>
+        <section>
+            <div id="inputItem">
+				<label for="adicionar"></label>
+                <input id="adicionar" type="text" placeholder="nova tarefa">
+                <button type="button" id="addButton" onclick="adicionarItem(adicionar.value)">Adicionar</button>
+            </div>
+            <div>
+                <button onclick="salvarLista()">Salvar</button>
+                <button onclick="carregarLista()">Carregar</button>
+                <button onclick="limparLista()">Limpar</button>
+                <button onclick="deletarLista()">Deletar</button>
+            </div>
+            <div class="container">
+                <ul id="lista" class="lista"></ul>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
