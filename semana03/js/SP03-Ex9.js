@@ -9,7 +9,7 @@ input.addEventListener('keyup', function(event) {
 })
 
 
-
+//corrigido
 function adicionarItem (item) {
     
     if (!item) {
