@@ -29,20 +29,12 @@ const estados = {
 
 }
 
-validarEstado = estado => {
-    let arrayEstados = Object.entries(estados);
-     if (arrayEstados.some(elemento => elemento[0] === estado) || arrayEstados.some(elemento => elemento[1] === estado)) {
-         return estado;
-    }
-    return 'Estado inválido';
-}
-
 class Endereco {
     constructor(logradouro, numero, cidade, estado, pais, cep) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.cidade = cidade;
-        this._estado = validarEstado(estado);
+        this._estado = this.validarEstado(estado);
         this.pais = pais;
         this.cep = cep;
     }
@@ -80,7 +72,7 @@ class Conta {
     }
 }
 
-const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'Santa Catrina', 'Brasil', '88650-000');
+const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'Santa Catarina', 'Brasil', '88650-000');
 const cliente = new Cliente('Lucas', '123456789-11', '4998000000', endCliente);
 const contaCliente = new Conta('0001', '500000000', cliente);
 
