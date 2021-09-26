@@ -29,7 +29,7 @@ const estados = {
 
 }
 
-const validarEstado = estado => {
+validarEstado = estado => {
     let arrayEstados = Object.entries(estados);
      if (arrayEstados.some(elemento => elemento[0] === estado) || arrayEstados.some(elemento => elemento[1] === estado)) {
          return estado;
@@ -45,6 +45,14 @@ class Endereco {
         this._estado = validarEstado(estado);
         this.pais = pais;
         this.cep = cep;
+    }
+
+    validarEstado(estado) {
+        let arrayEstados = Object.entries(estados);
+        if (arrayEstados.some(elemento => elemento[0] === estado) || arrayEstados.some(elemento => elemento[1] === estado)) {
+            return estado;
+       }
+       return 'Estado inválido';
     }
 
     set estado(newEstado) {
@@ -72,7 +80,7 @@ class Conta {
     }
 }
 
-const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'Santa Catarina', 'Brasil', '88650-000');
+const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'Santa Catrina', 'Brasil', '88650-000');
 const cliente = new Cliente('Lucas', '123456789-11', '4998000000', endCliente);
 const contaCliente = new Conta('0001', '500000000', cliente);
 
