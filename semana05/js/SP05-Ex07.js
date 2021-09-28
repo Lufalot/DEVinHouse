@@ -34,25 +34,37 @@ class Endereco {
         this.logradouro = logradouro;
         this.numero = numero;
         this.cidade = cidade;
-        this._estado = this.validarEstado(estado);
+        //this._estado = this.validarEstado(estado);
+        this.estado = estado;
         this.pais = pais;
         this.cep = cep;
     }
 
-    validarEstado(estado) {
-        let arrayEstados = Object.entries(estados);
-        if (arrayEstados.some(elemento => elemento[0] === estado) || arrayEstados.some(elemento => elemento[1] === estado)) {
-            return estado;
-        }
-        return 'Estado inválido';
-    }
+    // validarEstado(estado) {
+    //     let arrayEstados = Object.entries(estados);
+    //     if (arrayEstados.some(elemento => elemento[0] === estado) || arrayEstados.some(elemento => elemento[1] === estado)) {
+    //         return estado;
+    //     }
+    //     return 'Estado inválido';
+    // }
 
+    /**
+     * @param {string} newEstado
+     */
     set estado(newEstado) {
         let arrayEstados = Object.entries(estados);
         if (arrayEstados.some(elemento => elemento[0] === newEstado) || arrayEstados.some(elemento => elemento[1] === newEstado)) {
-            this._estado = newEstado;
+            //this.estado = newEstado;
+            Object.defineProperty(this, 'estado', {
+                value: newEstado,
+                writable: true
+            })
+        } else {
+            Object.defineProperty(this, 'estado', {
+                value: 'Estado inválido',
+                writable: true
+            })
         }
-        this._estado = 'Estado inválido';
     }
 }
 
@@ -103,7 +115,7 @@ class Conta {
     }
 }
 
-const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'Santa Catarina', 'Brasil', '88650-000');
+const endCliente = new Endereco('Rua Principal', 202, 'Urubici', 'SC', 'Brasil', '88650-000');
 const cliente = new Cliente('Lucas', '04686944988', '4998000000', endCliente);
 const contaCliente = new Conta('0001', '500000000', cliente);
 
@@ -113,4 +125,6 @@ console.log(cliente);
 console.log(cliente.endereco);
 console.log(contaCliente);
 console.log(contaCliente.cliente);
+console.log(endCliente);
+endCliente.estado = 'teste';
 console.log(endCliente);
