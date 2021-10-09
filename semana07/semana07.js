@@ -11,3 +11,13 @@ function joke() {
 };
 
 button.addEventListener('click', joke);
+
+class Piada {
+    constructor(dataCriacao, urlIcone, id, url, piada) {
+        this.dataCriacao = dataCriacao,
+        this.urlIcone = urlIcone,
+        this.id = id,
+        this.url = url,
+        this.piada = piada
+    }
+}
