@@ -5,7 +5,7 @@ function joke() {
             .then(response => response.json())
             .then(data => {
                 let { created_at, icon_url, id, url, value } = data;
-                
+                new Piada(created_at, icon_url, id, url, value);
             })
             
 };
