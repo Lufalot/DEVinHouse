@@ -1,7 +1,5 @@
 const button = document.querySelector('input');
 
-let jokeData = {};
-
 class Piada {
     constructor(dataCriacao, urlIcone, id, url, piada) {
         this.dataCriacao = dataCriacao,
@@ -25,17 +23,16 @@ class Piada {
     }
 }
 
-function joke() {
-        fetch('https://api.chucknorris.io/jokes/random')
-            .then(response => response.json())
-            .then(data => {
-                let { created_at, icon_url, id, url, value } = data;
-                jokeData = new Piada(created_at, icon_url, id, url, value);
-                console.log(jokeData);            
-                jokeData.criarElemento();
-            })
-            
+async function joke() {
+        let response = await fetch('https://api.chucknorris.io/jokes/random');
+        let data = await response.json();
+        let { created_at, icon_url, id, url, value } = data;
+        let jokeData = new Piada(created_at, icon_url, id, url, value);
+        console.log(jokeData);            
+        jokeData.criarElemento();
 };
+            
+
 
 button.addEventListener('click', joke);
 
