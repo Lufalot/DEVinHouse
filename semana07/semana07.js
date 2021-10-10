@@ -1,12 +1,13 @@
 const button = document.querySelector('input');
 
 class Piada {
-    constructor(dataCriacao, urlIcone, id, url, piada) {
+    constructor(dataCriacao, urlIcone, id, url, piada, categoria) {
         this.dataCriacao = dataCriacao,
         this.urlIcone = urlIcone,
         this.id = id,
         this.url = url,
-        this.piada = piada
+        this.piada = piada,
+        this.categoria = categoria.toString();
     }
 
     criarElemento() {
@@ -24,15 +25,36 @@ class Piada {
 }
 
 async function joke() {
-        let response = await fetch('https://api.chucknorris.io/jokes/random');
+        let apiUrl = 'https://api.chucknorris.io/jokes/random'
+
+        const select = document.getElementById('categorias').value;
+        if (select !== 'nenhuma') {
+            apiUrl += `?category=${select}`;
+        }
+        
+        let response = await fetch(apiUrl);
         let data = await response.json();
-        let { created_at, icon_url, id, url, value } = data;
-        let jokeData = new Piada(created_at, icon_url, id, url, value);
+        let { created_at, icon_url, id, url, value, categories } = data;
+        let jokeData = new Piada(created_at, icon_url, id, url, value, categories);
         console.log(jokeData);            
         jokeData.criarElemento();
 };
-            
 
+async function carregarCategorias() {
+    const response = await fetch('https://api.chucknorris.io/jokes/categories');
+    const categorias = await response.json();
+    let select = document.getElementById('categorias');
+
+    for (let categoria of categorias) {
+        let option = document.createElement('option');
+        option.value = categoria;
+        option.text = categoria;
+        select.appendChild(option);
+    };
+
+    return categorias;
+};
+ 
+const categorias = carregarCategorias();
 
 button.addEventListener('click', joke);
-
