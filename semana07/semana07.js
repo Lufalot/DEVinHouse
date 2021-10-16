@@ -17,6 +17,7 @@ class Piada {
         
         img.src = this.urlIcone;
         span.textContent = `${this.piada} ${this.dataCriacao}`;
+        div.className = this.categoria;
 
         div.appendChild(img);
         div.appendChild(span);
