@@ -1,3 +1,8 @@
+h6 {
+  font-size: 20px;
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -13,7 +18,7 @@
   }
 }
 
-.App-header {
+body {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -26,6 +31,16 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.contato {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  font-size: 10px;
+  color: white;
+  margin: 15px;
 }
 
 @keyframes App-logo-spin {
