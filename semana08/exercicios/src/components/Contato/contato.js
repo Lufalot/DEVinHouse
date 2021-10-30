@@ -3,7 +3,7 @@ import React from "react";
 class Contato extends React.Component {
   render() {
     return (
-      <section class="contato">
+      <section className="contato">
         <img src={this.props.img} width="50px" alt="avatar" />
         <ul>
           <h6>{this.props.name}</h6>

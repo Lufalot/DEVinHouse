@@ -1,35 +1,21 @@
-import img from "./images/snakes_escher.jpg";
-import avatar from "./images/Matsya-Avatar.png";
+import ContactList from "./pages/ContactList";
 import "./App.css";
-import Button from "./components/Button/button";
-import Contato from "./components/Contato/contato";
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Button title={"GetStarted"} bgcolor={"blue"}></Button>
-      <ul>
-        <Contato
-          img={img}
-          name={"Lucas F. Lotaif"}
-          about={"Almost a full stack developer"}
-        />
-        <Contato
-          img={avatar}
-          name={"Another Contact"}
-          about={"about this contact"}
-        />
-        <Contato
-          img={avatar}
-          name={"Another Contact"}
-          about={"about this contact"}
-        />
-        <Contato
-          img={avatar}
-          name={"Another Contact"}
-          about={"about this contact"}
-        />
-      </ul>
+      <Router>
+        <Switch>
+          <Route path="/contato">
+            <ContactList />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
