@@ -5,9 +5,16 @@ class Header extends React.Component {
   render() {
     return (
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Palatare</h1>
-        <h6>{this.props.page}</h6>
+        <section>
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Palatare</h1>
+        </section>
+        <section>
+          <h6>{this.props.page}</h6>
+          <nav>
+            <a href="#">Receitas</a>
+          </nav>
+        </section>
       </header>
     );
   }
