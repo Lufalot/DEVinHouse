@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "../../components/Button/button";
+import LoginButton from "../../components/Button/loginButton";
 import Contato from "../../components/Contato/contato";
 import img from "../../images/snakes_escher.jpg";
 import avatar from "../../images/Matsya-Avatar.png";
@@ -8,7 +8,7 @@ class ContactList extends Component {
   render() {
     return (
       <div className="contactList">
-        <Button title={"GetStarted"} bgcolor={"blue"}></Button>
+        <LoginButton bgcolor={"blue"}></LoginButton>
         <ul className="listaContato">
           <Contato
             img={img}
