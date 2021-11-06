@@ -1,43 +1,39 @@
 const RECEITAS = [
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708875.jpg?w=300",
-    name: "Salada de trigo",
-    description: "Deliciosa salada leve e saudável com capuchinha e quark",
+    image:
+      "https://pensamentoverde.com.br/wp-content/uploads/2014/02/img126-300x195.jpg",
+    name: "Bife de casca de banana",
+    description: "Cascas de banana empanadas e fritas.",
   },
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708876.jpg?w=300",
-    name: "Mexido Mineiro com bertalha",
-    description: "Rápido e fácil de fazer com o soborô dontê",
+    image:
+      "https://pensamentoverde.com.br/wp-content/uploads/2014/02/img220.jpg",
+    name: "Torta salgada de casca de abóbora",
+    description: "Torta salgada de casca de abóbora com recheio de talos",
   },
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708877.jpg?w=300",
-    name: "Gyoza D’ora com ora-pro-nóbis",
-    description: "Vai se sentir no Japão comendo a folhinha do vaso",
+    image:
+      "https://pensamentoverde.com.br/wp-content/uploads/2014/02/img38-300x225.jpg",
+    name: "Geleia de cascas de frutas",
+    description: "Reaproveite cascas de frutas e faça uma deliciosa geléia.",
   },
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708878.jpg?w=300",
-    name: "Nhoque de ricota",
-    description: "Suculento noque com ora-pro-nóbis com molho de nirá",
+    image:
+      "https://pensamentoverde.com.br/wp-content/uploads/2014/02/img47-300x156.jpg",
+    name: "Sopa de talos",
+    description: "Use as sobras de talos em uma sopa soborosa.",
   },
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708879.jpg?w=300",
-    name: "Risoto de capuchinha",
-    description: "Flor do jardim com queijo camembert e mel",
+    image:
+      "https://pensamentoverde.com.br/wp-content/uploads/2014/02/img53-300x225.jpg",
+    name: "Bolo de Casca de Abóbora",
+    description: "Um bolo fofinho e gostoso feito de casca de abóbora.",
   },
   {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708880.jpg?w=300",
-    name: "Cheesecake de amora preta",
-    description: "Sobremesa delicious com cramble",
-  },
-  {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708881.jpg?w=300",
-    name: "Polenta mole",
-    description: "Fácil de comer com ragu de ora-pro-nóbis",
-  },
-  {
-    image: "https://www.rbsdirect.com.br/imagesrc/25708882.jpg?w=300",
-    name: "Ravióli de bertalha",
-    description: "Ravióli recheado com bertalha, ricota, tomate seco e nozes",
+    image:
+      "https://www.guiadasemana.com.br/contentFiles/system/pictures/2016/6/163583/original/shutterstock-312465158.jpg",
+    name: "Creme de folha de couve-flor",
+    description: "Sopa rápida que utiliza as folhas de couve-flor.",
   },
 ];
 
