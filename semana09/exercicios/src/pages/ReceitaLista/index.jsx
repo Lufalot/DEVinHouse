@@ -2,6 +2,7 @@ import React from "react";
 import Receita from "../../components/Receita";
 import RECEITAS from "../../assets/receitas";
 import Search from "../../components/Search";
+import "./index.css";
 
 class ReceitaLista extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class ReceitaLista extends React.Component {
     return (
       <>
         <Search onChange={this.handleSearch} />
-        <main class="receitaLista">
+        <main className="receitaLista">
           {this.state.receitasFiltradas.map((receita) => (
             <Receita
               image={receita.image}
