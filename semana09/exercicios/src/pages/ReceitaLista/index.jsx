@@ -13,7 +13,10 @@ class ReceitaLista extends React.Component {
   handleSearch = (e) => {
     const text = e.target.value;
     const resultFilter = this.receitas.filter((receita) => {
-      return receita.name.toLowerCase().includes(text.toLowerCase());
+      return (
+        receita.name.toLowerCase().includes(text.toLowerCase()) ||
+        receita.description.toLowerCase().includes(text.toLowerCase())
+      );
     });
 
     this.setState({ receitasFiltradas: resultFilter });
