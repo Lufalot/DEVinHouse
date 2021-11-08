@@ -1,7 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "./logo.png";
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <header className="App-header">
@@ -10,9 +15,8 @@ class Header extends React.Component {
           <h1>Palatare</h1>
         </section>
         <section>
-          <h6>{this.props.page}</h6>
           <nav>
-            <a href="#">Receitas</a>
+            {window.location.pathname !== "/" && <Link to={"/"}>Home</Link>}
           </nav>
         </section>
       </header>

@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import "./index.css";
+import "./styles.css";
 
 export default class TabelaNutricional extends Component {
   render() {
     return (
-      <div class="tabelaNutricional">
-        <table border="1">
-          <thead>{this.props.name}</thead>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <td colSpan="2" style={{ backgroundColor: "tomato" }}>
+                {this.props.name}
+              </td>
+            </tr>
+          </thead>
           <tbody>
-            <thead>{this.props.energia} Kcal</thead>
+            <tr>
+              <td colSpan="2">{this.props.energia} Kcal</td>
+            </tr>
             <tr>
               <td>Carboidratos</td>
               <td>{this.props.carboidratos}</td>

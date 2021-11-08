@@ -1,8 +1,8 @@
 import React from "react";
-import Receita from "../../components/Receita";
+import ReceitaItem from "./ReceitaItem";
 import RECEITAS from "../../assets/receitas";
-import Search from "../../components/Search";
-import "./index.css";
+import Search from "../Search";
+import "./styles.css";
 
 class ReceitaLista extends React.Component {
   constructor(props) {
@@ -29,11 +29,7 @@ class ReceitaLista extends React.Component {
         <Search onChange={this.handleSearch} />
         <main className="receitaLista">
           {this.state.receitasFiltradas.map((receita) => (
-            <Receita
-              image={receita.image}
-              name={receita.name}
-              description={receita.description}
-            />
+            <ReceitaItem key={receita.id} {...receita} />
           ))}
         </main>
       </>

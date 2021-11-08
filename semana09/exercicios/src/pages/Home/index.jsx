@@ -1,5 +1,5 @@
 import React from "react";
-import ReceitaLista from "../ReceitaLista";
+import ReceitaLista from "../../components/ReceitaLista";
 
 class Home extends React.Component {
   render() {

@@ -1,5 +1,6 @@
 const VALORES = [
   {
+    id: 0,
     name: "Banana",
     energia: 98,
     carboidratos: 26.0,
@@ -7,6 +8,7 @@ const VALORES = [
     lipideos: 0.1,
   },
   {
+    id: 1,
     name: "Abóbora",
     energia: 48,
     carboidratos: 1.4,
@@ -14,6 +16,7 @@ const VALORES = [
     lipideos: 10.8,
   },
   {
+    id: 2,
     name: "Couve-flor",
     energia: 23,
     carboidratos: 4.5,
@@ -21,6 +24,7 @@ const VALORES = [
     lipideos: 0.2,
   },
   {
+    id: 3,
     name: "Morango",
     energia: 33,
     carboidratos: 8,

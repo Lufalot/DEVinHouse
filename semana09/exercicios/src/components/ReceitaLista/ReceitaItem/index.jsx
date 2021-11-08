@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-class Receita extends React.Component {
+class ReceitaItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,10 +22,20 @@ class Receita extends React.Component {
         <h4>{this.props.name}</h4>
         <span>{this.props.description}</span>
         <div className="footer-buttons">
-          <input type="button" value="Veja a Receita" />
+          <Link
+            to={{
+              pathname: "/receita",
+              state: { ...this.props },
+            }}
+          >
+            <input type="button" value="Veja a Receita" />
+          </Link>
           <span
             onClick={this.handleLike}
-            style={{ color: this.state.isLiked ? "red" : "black" }}
+            style={{
+              color: this.state.isLiked ? "red" : "black",
+              cursor: "copy",
+            }}
           >
             ❤
           </span>
@@ -34,4 +45,4 @@ class Receita extends React.Component {
   }
 }
 
-export default Receita;
+export default ReceitaItem;
