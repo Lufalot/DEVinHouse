@@ -1,0 +1,21 @@
+.tabelaNutricional {
+  display: flex;
+  justify-content: right;
+}
+
+td {
+  line-height: 3rem;
+  border-bottom: 1px solid gray;
+  padding: 0 5px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 10px;
+  font-size: 13px;
+}
+
+tr {
+  padding: 0px;
+  margin: 0px;
+}

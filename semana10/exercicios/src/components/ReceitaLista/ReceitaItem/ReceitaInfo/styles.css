@@ -1,0 +1,11 @@
+.receita-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 100px;
+  white-space: pre;
+}
+
+p {
+  width: 80%;
+}
