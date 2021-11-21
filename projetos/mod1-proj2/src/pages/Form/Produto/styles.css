@@ -1,0 +1,16 @@
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: gainsboro;
+  padding: 10px;
+}
+
+.form-produto-container {
+  margin: 30px auto;
+}
+
+.imagem-produto {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}

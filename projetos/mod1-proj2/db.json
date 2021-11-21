@@ -1,0 +1,99 @@
+{
+  "user": {
+    "login": "sgi@devinhouse.com",
+    "password": "12345678"
+  },
+  "produtos": [
+    {
+      "imgUrl": "https://www.cafe3coracoes.com.br/wp-content/uploads/2020/12/tm-premium-02.png",
+      "nome": "Café Premium Estrada Real",
+      "custo": "13.50",
+      "descricao": "As Boas Práticas Agrícolas, o ponto de torra e moagem, fazem o sabor intenso e prolongado do seu café 3 Corações Premium Estrada Real. Uma bebida de Qualidade Certificada Superior e com notas sensoriais adocicadas, sem perder o sabor intenso e marcante. Um café forte que transforma o seu despertar numa agradável experiência!",
+      "fornecedor": "3 Corações",
+      "grupo": "Mercearia",
+      "id": 1
+    },
+    {
+      "imgUrl": "https://www.nestle.com.br/images/default-source/produtos/suflair-chocolate-ao-leite-50g.png",
+      "nome": "Chocolate Suflair",
+      "custo": "5",
+      "descricao": "Chocolate Suflair leite 50g. O SUFLAIR® mudou para melhor! O chocolate aerado que derrete suavemente na boca agora em novo formato e fórmula mais cremosa.",
+      "fornecedor": "Nestlé",
+      "grupo": "Mercearia",
+      "id": 2
+    },
+    {
+      "imgUrl": "https://shop.dececco.com/media/catalog/product/cache/0/image/380x380/5e06319eda06f020e43594a9c230972d/Q/S/QSXE050_1_2/shop.dececco.com--QSXE050-31.png",
+      "nome": "Conchiglie Rigate n° 50",
+      "custo": "7",
+      "descricao": "As Conchiglie Rigate, originárias da Campânia, hoje são apreciadas e difundidas em toda a Itália. Com um nome que vem da sua forma, que lembra a das conchas do mar (em italiano, conchiglie), são um dos formatos mais apreciados à mesa, devido à sua capacidade de receber qualquer condimento. Particularmente apropriadas para a preparação de receitas de forno, com condimentos de peixe ou de carne, são ótimas se combinadas com molhos leves de tomate, com ricota ou pesto genovês Disponíveis em embalagens de 500 g.",
+      "fornecedor": "De Cecco",
+      "grupo": "Massas",
+      "id": 3
+    }
+  ],
+  "empresas": [
+    {
+      "razao": "COMPRE CERTO LTDA",
+      "nome": "Supermercado Compre Certo",
+      "cnpj": "19.167.847/0001-93",
+      "email": "supercomprecertourubici@gmail.com",
+      "cep": "88650-000",
+      "endereco": "Avenida Adolfo Konder",
+      "numero": "1630",
+      "bairro": "Traçado",
+      "cidade": "Urubici",
+      "complemento": "",
+      "latitude": "-28.0070149",
+      "longitude": "-49.5909554",
+      "id": 1
+    },
+    {
+      "razao": "SUPERMERCADO GISELE BEPPLER EIRELI",
+      "nome": "Supermercado Beppler ",
+      "cnpj": "01.423.208/0001-86",
+      "email": "beppler_urubici@yahoo.com.br",
+      "cep": "88650-000",
+      "endereco": "Rua Rodolfo Andermann",
+      "numero": "704",
+      "bairro": "Esquina",
+      "cidade": "Urubici",
+      "complemento": "",
+      "latitude": "-27.9921206",
+      "longitude": "-49.5767766",
+      "id": 2
+    },
+    {
+      "razao": "JOSE BENONI NUNES E CIA LTDA",
+      "nome": "Supermercado Nunes",
+      "cnpj": "83.944.926/0002-43",
+      "email": "supermercado@nunes.com.br",
+      "cep": "88650-000",
+      "endereco": "Avenida Adolfo Konder",
+      "numero": "2189",
+      "bairro": "Centro",
+      "cidade": "Urubici",
+      "complemento": "",
+      "latitude": "-28.0119449",
+      "longitude": "-49.5912954",
+      "id": 3
+    },
+    {
+      "razao": "FRANCISCO C RODRIGUES E CIA LTDA",
+      "nome": "Mercado Quatro Irmaos",
+      "cnpj": "79.827.143/0001-21",
+      "email": "supermercado@4irmaos.com.br",
+      "cep": "88650-000",
+      "endereco": "Rua Cezario Amarante",
+      "numero": "302",
+      "bairro": "Centro",
+      "cidade": "urubici",
+      "complemento": "",
+      "latitude": "-28.015071",
+      "longitude": "-49.5940215",
+      "id": 4
+    }
+  ],
+  "fornecedores": ["3 Corações", "Nestlé", "De Cecco"],
+  "categorias": ["Mercearia", "Higiene", "Cereais", "Massas"]
+}

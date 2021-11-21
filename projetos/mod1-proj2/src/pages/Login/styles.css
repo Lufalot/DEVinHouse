@@ -1,0 +1,40 @@
+.form-login-container {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  gap: 10px;
+  margin: 0;
+}
+
+.form-button {
+  background-color: rgb(22, 80, 240);
+  border: 0;
+  border-radius: 3px;
+  color: aliceblue;
+}
+
+.form-button:hover {
+  background-color: rgb(17, 46, 126);
+  transition-duration: 300ms;
+}
+
+.form-button:focus {
+  background-color: rgb(70, 102, 189);
+  transition-duration: 30ms;
+}
