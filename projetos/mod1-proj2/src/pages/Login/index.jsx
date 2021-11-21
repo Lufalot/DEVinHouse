@@ -24,7 +24,6 @@ const Login = (props) => {
       try {
         const response = await fetch("http://localhost:3333/user");
         const user = await response.json();
-        console.log(user);
 
         if (user.login !== login || user.password !== password) {
           alert("Login ou senha incorretos.");
@@ -47,6 +46,7 @@ const Login = (props) => {
           type="email"
           name="login"
           placeholder="nome@empresa.com"
+          autoComplete="username"
           value={login}
           onChange={(e) => setLogin(e.target.value)}
           required
@@ -59,6 +59,7 @@ const Login = (props) => {
           type="password"
           name="password"
           placeholder="senha"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
