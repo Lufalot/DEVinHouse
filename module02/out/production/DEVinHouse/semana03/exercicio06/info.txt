@@ -1,0 +1,20 @@
+
+
+Implemente a classe Linguagem utilizada no programa a seguir:
+
+    List<Linguagem> linguagens = new ArrayList<Linguagem>();
+    linguagens.add(new Linguagem());
+    linguagens.add(new Linguagem(8.0f));
+    linguagens.add(new Linguagem("C#"));
+    linguagens.add(new Linguagem("EcmaScript", 6f));
+    linguagens.add(new Linguagem("Python", 3.10f));
+    linguagens.forEach((lang) -> {
+          System.out.println(lang);
+    });
+A saída esperada do programa acima é a seguinte:
+
+Linguagem: Java - Versão: 1.00
+Linguagem: Java - Versão: 8.00
+Linguagem: C# - Versão: 1.00
+Linguagem: EcmaScript - Versão: 6.00
+Linguagem: Python - Versão: 3.10
