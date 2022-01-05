@@ -15,23 +15,6 @@ public class Main {
         }
     }
 
-    public static void contabilizarCatalogo() {
-        int cachorros = 0, gatos = 0, morcegos = 0;
-        for (Mamifero mamifero : mamiferos) {
-            if (mamifero.toString().equals("Cachorro")) {
-                cachorros += 1;
-            } else if (mamifero.toString().equals("Gato")) {
-                gatos += 1;
-            } else if (mamifero.toString().equals("Morcego")) {
-                morcegos += 1;
-            }
-        }
-        System.out.println("O catálogo possui:");
-        System.out.println("   " + cachorros + " Cachorros");
-        System.out.println("   " + gatos + " Gatos");
-        System.out.println("   " + morcegos + " Morcegos");
-    }
-
     public static void main(String[] args) {
 
         String menu = "\n" +
@@ -47,6 +30,7 @@ public class Main {
                 "|-------------------------------|\n";
 
         int opcao;
+        int cachorros = 0, gatos = 0, morcegos = 0;
 
         do {
             System.out.println(menu);
@@ -57,19 +41,25 @@ public class Main {
                     listarCatalogo();
                     break;
                 case 2:
-                    contabilizarCatalogo();
+                    System.out.println("O catálogo possui:");
+                    System.out.println("   " + cachorros + " Cachorros");
+                    System.out.println("   " + gatos + " Gatos");
+                    System.out.println("   " + morcegos + " Morcegos");
                     break;
                 case 3:
                     Mamifero novoCachorro = new Cachorro();
                     mamiferos.add(novoCachorro);
+                    cachorros += 1;
                     break;
                 case 4:
                     Mamifero novoGato = new Gato();
                     mamiferos.add(novoGato);
+                    gatos += 1;
                     break;
                 case 5:
                     Mamifero novoMorcego = new Morcego();
                     mamiferos.add(novoMorcego);
+                    morcegos += 1;
                     break;
                 case 0:
                     System.out.println("Até a próxima...");
