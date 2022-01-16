@@ -8,6 +8,10 @@ public class Arma {
     }
 
     public void infoDano(int dano) {
-        System.out.printf("Você atacou com sua arma e causou %d de dano no inimigo!\n", dano);
+        System.out.printf("Você atacou com sua arma e causou %d pontos de dano no inimigo!\n", dano);
+    }
+
+    public int getAtaque() {
+        return ataque;
     }
 }

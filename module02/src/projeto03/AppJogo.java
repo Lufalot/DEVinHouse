@@ -10,6 +10,8 @@ public class AppJogo {
     public static Arma arma;
     public static Genero sexo = null;
     public static String nome;
+    public static Personagem armeiro = new Orc("Armeiro");
+    public static Personagem alquimista = new Orc("Alquimista");
 
     public static void inicio() {
         System.out.println("Seja bem vindo(a) à BATALHA FINAL!");
@@ -23,23 +25,23 @@ public class AppJogo {
     }
 
     public static void escholherGenero() {
-        String sexoChar;
+        int opcao;
         try {
             do {
-                System.out.println("Escolha o gênero do personagem (M ou F):");
+                System.out.println("Escolha o gênero do personagem: 1 - Masculino | 2 - Feminino");
 
-                sexoChar = keyboard.nextLine();
-                switch(sexoChar) {
-                    case "M":
+                opcao = keyboard.nextInt();
+                switch(opcao) {
+                    case 1:
                         sexo = Genero.MASCULINO;
                         break;
-                    case "F":
+                    case 2:
                         sexo = Genero.FEMININO;
                         break;
                     default:
                         System.out.println("Opção inválida, tente novamente.");
                 }
-            } while (!sexoChar.equals("M") && !sexoChar.equals("F"));
+            } while (opcao < 1 || opcao > 2);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -116,7 +118,7 @@ public class AppJogo {
     }
 
     public static void escolherMotivacao() {
-        System.out.println("Escolha sua motivação para invadir a caverna do inimigo e derrotá-lo: 1 - VINGANÇA | 2 - GLÓRIA");
+        System.out.println("Escolha sua motivação para invadir a caverna do inimigo e derrotá-lo:\n1 - VINGANÇA | 2 - GLÓRIA");
 
         String vinganca = "Imagens daquela noite trágica invadem sua mente. Você nem precisa se esforçar\n" +
                 "para lembrar, pois essas memórias estão sempre presentes, mesmo que de pano de fundo,\n" +
@@ -195,6 +197,51 @@ public class AppJogo {
 
     }
 
+    public static void combateNormal(Personagem jogador, Personagem inimigo) {
+        do {
+            //Turno jogador
+            System.out.println("1 - Atacar | 2 - Fugir");
+            int opcao = keyboard.nextInt();
+            if (opcao == 2) {
+                System.out.println("Você não estava preparado para a força do inimigo,\n" +
+                        "e decide fugir para que possa tentar novamente em uma próxima vez.”.\n");
+                System.exit(0);
+            }
+            int danoTurnoJogador = jogador.ataque(jogador, inimigo, 20, arma.getAtaque());
+            if (danoTurnoJogador > 0) arma.infoDano(danoTurnoJogador);
+
+            //Se inimigo morre, acaba o combate
+            if (inimigo.getVida() < 1) {
+                System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.\n");
+                return;
+            }
+
+            //Turno inimigo
+            int danoTurnoInimigo = inimigo.ataque(inimigo, jogador, 20, inimigo.getAtaque());
+            if (danoTurnoInimigo > 0) {
+                if (jogador.getVida() < 1) {
+                    System.out.printf("O inimigo atacou! Você sofreu %d de dano e morreu.\n", danoTurnoInimigo);
+                    jogador.getMensagemMorte();
+                    System.exit(0);
+                }
+                System.out.printf("O inimigo atacou! Você sofreu %d de dano e agora possui %d pontos de vida.\n", danoTurnoInimigo, jogador.getVida());
+            }
+
+        } while (jogador.getVida() > 0 && inimigo.getVida() > 0);
+
+    }
+
+    public static void armadilha(int dado) {
+        int danoRandom = (int) Math.floor(Math.random()*dado+1);
+        int danoTotal = danoRandom - (jogador.getDefesa()/10);
+        if (danoTotal <= 0) {
+            System.out.println("Você defendeu o ataque disparado pela armadilha.\n");
+            return;
+        }
+        jogador.sofrerDano(danoTotal);
+        System.out.printf("Você sofreu %d de dano, e agora possui %d pontos de vida.\n", danoTotal, jogador.getVida());
+    }
+
     public static void decidirEntrar() {
 
         String andando = "Você toma cuidado e vai caminhando vagarosamente em direção à luz. Quando você\n" +
@@ -221,8 +268,8 @@ public class AppJogo {
                 switch(opcao) {
                     case 1:
                         System.out.println(andando);
-                        //toma dano utilizando mecanismo de
-                        //ataque descrito abaixo, porém o rolamento de dados é só de 1-10
+                        //Sofre dano utilizando D10
+                        armadilha(10);
                         break;
                     case 2:
                         System.out.println(correndo);
@@ -240,7 +287,7 @@ public class AppJogo {
     }
 
     public static void portaDireita() {
-        String texto01 = "Você se aproxima, tentando ouvir o que acontece porta adentro, mas não\n" +
+        String textoPortaDireita = "Você se aproxima, tentando ouvir o que acontece porta adentro, mas não\n" +
                 "escuta nada. Segura com mais força sua arma com uma mão, enquanto empurra a porta com a\n" +
                 "outra. Ao entrar, você se depara com uma sala espaçosa, com vários equipamentos de batalha\n" +
                 "pendurados nas paredes e dispostos em armários e mesas. Você imagina que este seja o arsenal\n" +
@@ -252,11 +299,14 @@ public class AppJogo {
                 "dos capitães do inimigo. Um orque horrendo, de armadura, capacete e espada em punho, em\n" +
                 "posição de combate. Ele avança em sua direção.\n";
 
-        System.out.println(texto01);
-        //combate
+        System.out.println(textoPortaDireita);
 
+        combateNormal(jogador, armeiro);
 
+    }
 
+    public static void portaEsquerda() {
+        String textoPortaEsquerda = ""
     }
 
     public static void main(String[] args) {
@@ -282,7 +332,7 @@ public class AppJogo {
         decidirContinuar();
         decidirEntrar();
 
-        String antesala = "Você se encontra sozinho em uma sala quadrada, contendo uma porta em cada parede. Uma\n" +
+        String antesala = "\nVocê se encontra sozinho em uma sala quadrada, contendo uma porta em cada parede. Uma\n" +
                 "delas foi aquela pela qual você entrou, que estava aberta, e as outras três estão fechadas. A\n" +
                 "porta à sua frente é a maior das quatro, com inscrições em seu entorno em uma língua que você\n" +
                 "não sabe ler, mas reconhece como sendo a língua antiga utilizada pelo inimigo. Você se aproxima\n" +
