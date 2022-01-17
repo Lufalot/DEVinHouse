@@ -4,6 +4,7 @@ public class Personagem {
     private String nome;
     private Genero sexo;
     private int vida, ataque, defesa;
+    private final int vidaTotal;
     //motivacao 1=Vingança - 2=Glória
     private int motivacao;
 
@@ -11,6 +12,7 @@ public class Personagem {
         this.nome = nome;
         this.sexo = sexo;
         this.vida = vida;
+        this.vidaTotal = vida;
         this.ataque = ataque;
         this.defesa = defesa;
     }
@@ -39,6 +41,8 @@ public class Personagem {
         this.vida = vida;
     }
 
+    public void regenerar() { this.vida = vidaTotal; }
+
     public int getAtaque() {
         return ataque;
     }
@@ -55,8 +59,16 @@ public class Personagem {
         this.defesa = defesa;
     }
 
-    public int getMotivacao() {
-        return motivacao;
+    public void incrementarDefesa(int acrescimo) {
+        this.setDefesa(this.getDefesa() + acrescimo);
+    }
+
+    public void getMensagemMotivacao() {
+            if (this.motivacao == 1) System.out.println("Você obteve sua vingança. Você se ajoelha e cai no choro, invadido por uma\n" +
+                    "sensação de alívio e felicidade. Você se vingou, tudo que sempre quis, está feito. Agora você\n" +
+                    "pode seguir sua vida.\n");
+            if (this.motivacao == 2) System.out.println("O êxtase em que você se encontra não cabe dentro de si. Você se ajoelha e grita de\n" +
+                    "alegria. A glória o aguarda, você a conquistou.\n");
     }
 
     public void setMotivacao(int motivacao) {
@@ -74,7 +86,7 @@ public class Personagem {
 
     public int ataque(Personagem atacante, Personagem defensor, int dado, int danoArma) {
         int danoRandom = (int) Math.floor(Math.random()*dado+1);
-        System.out.printf("\n%s rolou o dado D%d e tirou %d.\n", atacante.getNome(), dado, danoRandom);
+
         //Se dado = 1, erra o alvo.
         if (danoRandom == 1) {
             System.out.printf("\n%s rolou o dado D%d, tirou %d e errou o ataque.\n", atacante.getNome(), dado, danoRandom);

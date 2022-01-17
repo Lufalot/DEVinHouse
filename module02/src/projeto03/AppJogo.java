@@ -8,10 +8,11 @@ public class AppJogo {
     static Scanner keyboard = new Scanner(System.in);
     public static Personagem jogador;
     public static Arma arma;
-    public static Genero sexo = null;
+    public static Genero sexo;
     public static String nome;
     public static Personagem armeiro = new Orc("Armeiro");
     public static Personagem alquimista = new Orc("Alquimista");
+    public static Personagem lider = new Lider();
 
     public static void inicio() {
         System.out.println("Seja bem vindo(a) à BATALHA FINAL!");
@@ -125,7 +126,7 @@ public class AppJogo {
                 "quando você tem outros pensamentos em foco, elas nunca o deixaram. Elas são o combustível\n" +
                 "que te ﬁzeram chegar até aqui. E você sabe que não irá desistir até ter vingado a morte daqueles\n" +
                 "que foram - e pra sempre serão - sua fonte de amor e desejo de continuar vivo. O maldito líder\n" +
-                "ﬁnalmente pagará por tanto mal causado na vida de tantos (e principalmente na sua).\n";
+                "finalmente pagará por tanto mal causado na vida de tantos (e principalmente na sua).\n";
 
         String gloria = "Você já consegue visualizar na sua mente o povo da cidade te recebendo de braços\n" +
                 "abertos, bardos criando canções sobre seus feitos heróicos, nobres te presenteando com jóias e\n" +
@@ -197,38 +198,57 @@ public class AppJogo {
 
     }
 
-    public static void combateNormal(Personagem jogador, Personagem inimigo) {
-        do {
-            //Turno jogador
-            System.out.println("1 - Atacar | 2 - Fugir");
-            int opcao = keyboard.nextInt();
-            if (opcao == 2) {
-                System.out.println("Você não estava preparado para a força do inimigo,\n" +
-                        "e decide fugir para que possa tentar novamente em uma próxima vez.”.\n");
+    public static void combateTurnoJogador(Personagem jogador, Personagem inimigo) {
+        //Turno jogador
+        System.out.println("1 - Atacar | 2 - Fugir");
+        int opcao = keyboard.nextInt();
+        if (opcao == 2) {
+            System.out.println("Você não estava preparado para a força do inimigo,\n" +
+                    "e decide fugir para que possa tentar novamente em uma próxima vez.”.\n");
+            System.exit(0);
+        }
+        int danoTurnoJogador = jogador.ataque(jogador, inimigo, 20, arma.getAtaque());
+        if (danoTurnoJogador > 0) arma.infoDano(danoTurnoJogador);
+
+        //Se inimigo morre, acaba o combate
+        if (inimigo.getVida() < 1) {
+            System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.\n");
+        }
+    }
+
+    public static void combateTurnoInimigo(Personagem jogador, Personagem inimigo) {
+        //Turno inimigo
+        int danoTurnoInimigo = inimigo.ataque(inimigo, jogador, 20, inimigo.getAtaque());
+        if (danoTurnoInimigo > 0) {
+            if (jogador.getVida() < 1) {
+                System.out.printf("O inimigo atacou! Você sofreu %d de dano e morreu.\n", danoTurnoInimigo);
+                jogador.getMensagemMorte();
                 System.exit(0);
             }
-            int danoTurnoJogador = jogador.ataque(jogador, inimigo, 20, arma.getAtaque());
-            if (danoTurnoJogador > 0) arma.infoDano(danoTurnoJogador);
+            System.out.printf("O inimigo atacou! Você sofreu %d de dano e agora possui %d pontos de vida.\n", danoTurnoInimigo, jogador.getVida());
+        }
+    }
 
+
+    public static void combateNormal(Personagem jogador, Personagem inimigo) {
+        do {
+            combateTurnoJogador(jogador, inimigo);
             //Se inimigo morre, acaba o combate
-            if (inimigo.getVida() < 1) {
-                System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.\n");
-                return;
-            }
-
-            //Turno inimigo
-            int danoTurnoInimigo = inimigo.ataque(inimigo, jogador, 20, inimigo.getAtaque());
-            if (danoTurnoInimigo > 0) {
-                if (jogador.getVida() < 1) {
-                    System.out.printf("O inimigo atacou! Você sofreu %d de dano e morreu.\n", danoTurnoInimigo);
-                    jogador.getMensagemMorte();
-                    System.exit(0);
-                }
-                System.out.printf("O inimigo atacou! Você sofreu %d de dano e agora possui %d pontos de vida.\n", danoTurnoInimigo, jogador.getVida());
-            }
+            if (inimigo.getVida() < 1) { return; }
+            combateTurnoInimigo(jogador, inimigo);
 
         } while (jogador.getVida() > 0 && inimigo.getVida() > 0);
 
+    }
+
+    public static void combateSemIniciativa(Personagem jogador, Personagem inimigo) {
+        do {
+            combateTurnoInimigo(jogador, inimigo);
+            //Se jogador morre, acaba o combate
+            if (jogador.getVida() < 1) { return;}
+            combateTurnoJogador(jogador, inimigo);
+
+        } while (jogador.getVida() > 0 && inimigo.getVida() > 0);
     }
 
     public static void armadilha(int dado) {
@@ -286,8 +306,43 @@ public class AppJogo {
         }
     }
 
+    public static void decidirPegarArmadura() {
+        String texto01 = "Após derrotar o Armeiro, você percebe que seus equipamentos estão muito daniﬁcados, e olha\n" +
+                "em volta, encarando todas aquelas peças de armaduras resistentes e em ótimo estado.\n";
+
+        System.out.println(texto01);
+
+        String pegar = "Você resolve usar os equipamentos do inimigo contra ele, e trocar algumas peças suas,\n" +
+                "que estavam daniﬁcadas, pelas peças de armaduras existentes na sala. De armadura nova,\n" +
+                "você se sente mais protegido para os desaﬁos à sua frente.\n";
+
+        String naoPegar = "Você decide que não precisa utilizar nada que venha das mãos do inimigo.\n";
+
+        int opcao;
+        try {
+            do {
+                System.out.println("1 - Pegar nova armadura | 2 - Ignorar.");
+                opcao = keyboard.nextInt();
+                switch(opcao) {
+                    case 1:
+                        System.out.println(pegar);
+                        jogador.incrementarDefesa(5);
+                        break;
+                    case 2:
+                        System.out.println(naoPegar);
+                        break;
+                    default:
+                        System.out.println("Opção inválida, tente novamente.");
+                }
+            } while (opcao < 1 || opcao > 2);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void portaDireita() {
-        String textoPortaDireita = "Você se aproxima, tentando ouvir o que acontece porta adentro, mas não\n" +
+        String texto01 = "Você se aproxima, tentando ouvir o que acontece porta adentro, mas não\n" +
                 "escuta nada. Segura com mais força sua arma com uma mão, enquanto empurra a porta com a\n" +
                 "outra. Ao entrar, você se depara com uma sala espaçosa, com vários equipamentos de batalha\n" +
                 "pendurados nas paredes e dispostos em armários e mesas. Você imagina que este seja o arsenal\n" +
@@ -299,27 +354,115 @@ public class AppJogo {
                 "dos capitães do inimigo. Um orque horrendo, de armadura, capacete e espada em punho, em\n" +
                 "posição de combate. Ele avança em sua direção.\n";
 
-        System.out.println(textoPortaDireita);
+        System.out.println(texto01);
 
         combateNormal(jogador, armeiro);
 
+        decidirPegarArmadura();
+
+        String texto02 = "Em uma mesa, você encontra uma chave dourada, e sabe que aquela chave abre uma das\n" +
+                "fechaduras da porta do líder inimigo. Você pega a chave e guarda numa pequena bolsa que leva\n" +
+                "presa ao cinto.";
+
+        System.out.println(texto02);
+
+    }
+
+    public static void decidirPegarPocao() {
+        String texto01 = "Após derrotar o Alquimista, você olha em volta, tentando reconhecer alguma poção do estoque\n" +
+                "do inimigo. Em uma mesa, você reconhece uma pequena garrafa de vidro contendo um líquido\n" +
+                "levemente rosado, pega a garrafa e pondera se deve beber um gole.\n";
+
+        System.out.println(texto01);
+
+        int opcao;
+        try {
+            do {
+                System.out.println("1 - Beber poção | 2 - Ignorar.");
+                opcao = keyboard.nextInt();
+                switch(opcao) {
+                    case 1:
+                        System.out.println("Você se sente revigorado para seguir adiante!\n");
+                        jogador.regenerar();
+                        break;
+                    case 2:
+                        System.out.println("Você fica receoso de beber algo produzido pelo inimigo.");
+                        break;
+                    default:
+                        System.out.println("Opção inválida, tente novamente.");
+                }
+            } while (opcao < 1 || opcao > 2);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void portaEsquerda() {
-        String textoPortaEsquerda = ""
+        String texto01 = "\nVocê retorna à sala anterior e se dirige à porta da esquerda. Você se\n" +
+                "aproxima, tentando ouvir o que acontece porta adentro, mas não escuta nada. Segura com mais\n" +
+                "força sua arma com uma mão, enquanto empurra a porta com a outra. Ao entrar, você se depara\n" +
+                "com uma sala parecida com a do arsenal, mas em vez de armaduras, existem vários potes e\n" +
+                "garrafas de vidro com conteúdos misteriosos e de cores diversas, e você entende que o capitão\n" +
+                "que vive ali, realiza experimentos com diversos ingredientes, criando poções utilizadas pelos\n" +
+                "soldados para aterrorizar a região.\n" +
+                "\n" +
+                "No fundo da sala, olhando em sua direção, está outro dos capitães do inimigo. Um orque\n" +
+                "horrendo, de armadura, cajado em punho, em posição de combate. Ele avança em sua direção.\n";
+
+        System.out.println(texto01);
+
+        combateNormal(jogador, alquimista);
+
+        decidirPegarPocao();
+
+        String texto02 = "Ao lado da porta, você vê uma chave dourada em cima de uma mesa, e sabe que aquela chave\n" +
+                "abre a outra fechadura da porta do líder inimigo. Você pega a chave e guarda na pequena bolsa\n" +
+                "que leva presa ao cinto.";
+
+        System.out.println(texto02);
+    }
+
+    public static void portaCentral() {
+        String texto01 = "Lá dentro, você vê o líder sentado em uma poltrona dourada, com duas fogueiras de cada lado, e\n" +
+                "prisioneiros acorrentados às paredes.\n" +
+                "\n" +
+                "Ele percebe sua chegada e se levanta com um salto, apanhando seu machado de guerra de\n" +
+                "lâmina dupla.\n";
+
+        System.out.println(texto01);
+
+        int opcao;
+        try {
+            do {
+                System.out.println("1 - Atacar | 2 - Esperar.");
+                opcao = keyboard.nextInt();
+                switch(opcao) {
+                    case 1:
+                        combateNormal(jogador, lider);
+                        break;
+                    case 2:
+                        combateSemIniciativa(jogador, lider);
+                        break;
+                    default:
+                        System.out.println("Opção inválida, tente novamente.");
+                }
+            } while (opcao < 1 || opcao > 2);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        jogador.getMensagemMotivacao();
+
+        System.out.println("Você se levanta, olha para os prisioneiros, vai de um em um e os liberta, e todos vocês saem em\n" +
+                "direção à noite, retornando à cidade. Seu dever está cumprido.");
     }
 
     public static void main(String[] args) {
 
         inicio();
-        jogador.setDefesa(jogador.getDefesa() + 10);
-        System.out.println(jogador.getDefesa());
-        arma.infoDano(10);
-        System.out.println(sexo);
-        System.out.println(jogador.getNome());
 
         String intro = "A noite se aproxima, a lua já surge no céu, estrelas vão se acendendo, e sob a luz do crepúsculo\n" +
-                "você está prestes a entrar na fase ﬁnal da sua missão. Você olha para o portal à sua frente, e\n" +
+                "você está prestes a entrar na fase final da sua missão. Você olha para o portal à sua frente, e\n" +
                 "sabe que a partir desse ponto, sua vida mudará para sempre.\n" +
                 "Memórias do caminho percorrido para chegar até aqui invadem sua mente. Você se lembra de\n" +
                 "todos os inimigos já derrotados para alcançar o covil do líder maligno. Olha para seu\n" +
@@ -332,7 +475,7 @@ public class AppJogo {
         decidirContinuar();
         decidirEntrar();
 
-        String antesala = "\nVocê se encontra sozinho em uma sala quadrada, contendo uma porta em cada parede. Uma\n" +
+        String antesala01 = "\nVocê se encontra sozinho em uma sala quadrada, contendo uma porta em cada parede. Uma\n" +
                 "delas foi aquela pela qual você entrou, que estava aberta, e as outras três estão fechadas. A\n" +
                 "porta à sua frente é a maior das quatro, com inscrições em seu entorno em uma língua que você\n" +
                 "não sabe ler, mas reconhece como sendo a língua antiga utilizada pelo inimigo. Você se aproxima\n" +
@@ -342,10 +485,20 @@ public class AppJogo {
                 "\n" +
                 "Você se dirige para a porta à direita.\n";
 
-        System.out.println(antesala);
+        System.out.println(antesala01);
 
         portaDireita();
 
+        portaEsquerda();
+
+        String antesala02 = "De volta à sala das portas, você se dirige à porta final. Coloca as chaves nas fechaduras, e a\n" +
+                "porta se abre. Seu coração acelera, memórias de toda a sua vida passam pela sua mente, e você\n" +
+                "percebe que está muito próximo do seu objetivo final. Segura sua arma com mais ﬁrmeza, foca\n" +
+                "no combate que você sabe que irá se seguir, e adentra a porta.\n";
+
+        System.out.println(antesala02);
+
+        portaCentral();
 
     }
 }
