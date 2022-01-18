@@ -6,13 +6,12 @@ import java.util.Scanner;
 
 public class AppJogo {
     static Scanner keyboard = new Scanner(System.in);
-    public static Personagem jogador;
-    public static Arma arma;
-    public static Genero sexo;
-    public static String nome;
-    public static Personagem armeiro = new Orc("Armeiro");
-    public static Personagem alquimista = new Orc("Alquimista");
-    public static Personagem lider = new Lider();
+    private static Personagem jogador;
+    private static Genero sexo;
+    private static String nome;
+    private static final Personagem armeiro = new Orc("Armeiro");
+    private static final Personagem alquimista = new Orc("Alquimista");
+    private static final Personagem lider = new Lider();
 
     public static void inicio() {
         System.out.println("Seja bem vindo(a) à BATALHA FINAL!");
@@ -86,28 +85,28 @@ public class AppJogo {
                 opcao = keyboard.nextInt();
                 switch (opcao) {
                     case 1:
-                        arma = new Espada();
+                        jogador.setArma(new Espada());
                         break;
                     case 2:
-                        arma = new Machado();
+                        jogador.setArma(new Machado());
                         break;
                     case 3:
-                        arma = new Martelo();
+                        jogador.setArma(new Martelo());
                         break;
                     case 4:
-                        arma = new Clava();
+                        jogador.setArma(new Clava());
                         break;
                     case 5:
-                        arma = new ArcoFlecha();
+                        jogador.setArma(new ArcoFlecha());
                         break;
                     case 6:
-                        arma = new BestaVirote();
+                        jogador.setArma(new BestaVirote());
                         break;
                     case 7:
-                        arma = new Cajado();
+                        jogador.setArma(new Cajado());
                         break;
                     case 8:
-                        arma = new Livro();
+                        jogador.setArma(new Livro());
                         break;
                     default:
                         System.out.println("Opção inválida, tente novamente.");
@@ -198,58 +197,7 @@ public class AppJogo {
 
     }
 
-    public static void combateTurnoJogador(Personagem jogador, Personagem inimigo) {
-        //Turno jogador
-        System.out.println("1 - Atacar | 2 - Fugir");
-        int opcao = keyboard.nextInt();
-        if (opcao == 2) {
-            System.out.println("Você não estava preparado para a força do inimigo,\n" +
-                    "e decide fugir para que possa tentar novamente em uma próxima vez.”.\n");
-            System.exit(0);
-        }
-        int danoTurnoJogador = jogador.ataque(jogador, inimigo, 20, arma.getAtaque());
-        if (danoTurnoJogador > 0) arma.infoDano(danoTurnoJogador);
 
-        //Se inimigo morre, acaba o combate
-        if (inimigo.getVida() < 1) {
-            System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.\n");
-        }
-    }
-
-    public static void combateTurnoInimigo(Personagem jogador, Personagem inimigo) {
-        //Turno inimigo
-        int danoTurnoInimigo = inimigo.ataque(inimigo, jogador, 20, inimigo.getAtaque());
-        if (danoTurnoInimigo > 0) {
-            if (jogador.getVida() < 1) {
-                System.out.printf("O inimigo atacou! Você sofreu %d de dano e morreu.\n", danoTurnoInimigo);
-                jogador.getMensagemMorte();
-                System.exit(0);
-            }
-            System.out.printf("O inimigo atacou! Você sofreu %d de dano e agora possui %d pontos de vida.\n", danoTurnoInimigo, jogador.getVida());
-        }
-    }
-
-
-    public static void combateNormal(Personagem jogador, Personagem inimigo) {
-        do {
-            combateTurnoJogador(jogador, inimigo);
-            //Se inimigo morre, acaba o combate
-            if (inimigo.getVida() < 1) { return; }
-            combateTurnoInimigo(jogador, inimigo);
-
-        } while (jogador.getVida() > 0 && inimigo.getVida() > 0);
-
-    }
-
-    public static void combateSemIniciativa(Personagem jogador, Personagem inimigo) {
-        do {
-            combateTurnoInimigo(jogador, inimigo);
-            //Se jogador morre, acaba o combate
-            if (jogador.getVida() < 1) { return;}
-            combateTurnoJogador(jogador, inimigo);
-
-        } while (jogador.getVida() > 0 && inimigo.getVida() > 0);
-    }
 
     public static void armadilha(int dado) {
         int danoRandom = (int) Math.floor(Math.random()*dado+1);
@@ -356,7 +304,7 @@ public class AppJogo {
 
         System.out.println(texto01);
 
-        combateNormal(jogador, armeiro);
+        Combate.combateNormal(jogador, armeiro);
 
         decidirPegarArmadura();
 
@@ -411,7 +359,7 @@ public class AppJogo {
 
         System.out.println(texto01);
 
-        combateNormal(jogador, alquimista);
+        Combate.combateNormal(jogador, alquimista);
 
         decidirPegarPocao();
 
@@ -438,10 +386,10 @@ public class AppJogo {
                 opcao = keyboard.nextInt();
                 switch(opcao) {
                     case 1:
-                        combateNormal(jogador, lider);
+                        Combate.combateNormal(jogador, lider);
                         break;
                     case 2:
-                        combateSemIniciativa(jogador, lider);
+                        Combate.combateSemIniciativa(jogador, lider);
                         break;
                     default:
                         System.out.println("Opção inválida, tente novamente.");

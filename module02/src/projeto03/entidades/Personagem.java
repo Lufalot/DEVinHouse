@@ -5,6 +5,7 @@ public class Personagem {
     private Genero sexo;
     private int vida, ataque, defesa;
     private final int vidaTotal;
+    private Arma arma;
     //motivacao 1=Vingança - 2=Glória
     private int motivacao;
 
@@ -63,16 +64,24 @@ public class Personagem {
         this.setDefesa(this.getDefesa() + acrescimo);
     }
 
+    public Arma getArma() {
+        return arma;
+    }
+
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    public void setMotivacao(int motivacao) {
+        this.motivacao = motivacao;
+    }
+
     public void getMensagemMotivacao() {
             if (this.motivacao == 1) System.out.println("Você obteve sua vingança. Você se ajoelha e cai no choro, invadido por uma\n" +
                     "sensação de alívio e felicidade. Você se vingou, tudo que sempre quis, está feito. Agora você\n" +
                     "pode seguir sua vida.\n");
             if (this.motivacao == 2) System.out.println("O êxtase em que você se encontra não cabe dentro de si. Você se ajoelha e grita de\n" +
                     "alegria. A glória o aguarda, você a conquistou.\n");
-    }
-
-    public void setMotivacao(int motivacao) {
-        this.motivacao = motivacao;
     }
 
     public void getMensagemMorte() {
@@ -84,28 +93,6 @@ public class Personagem {
         this.vida = this.getVida() - dano;
     }
 
-    public int ataque(Personagem atacante, Personagem defensor, int dado, int danoArma) {
-        int danoRandom = (int) Math.floor(Math.random()*dado+1);
-
-        //Se dado = 1, erra o alvo.
-        if (danoRandom == 1) {
-            System.out.printf("\n%s rolou o dado D%d, tirou %d e errou o ataque.\n", atacante.getNome(), dado, danoRandom);
-            return 0;
-        }
-        //Se dado = 20, ataque crítico, ignora defesa.
-        if (danoRandom == 20) {
-            System.out.printf("\n%s rolou o dado D%d, tirou %d e acertou um ataque crítico.\n", atacante.getNome(), dado, danoRandom);
-            int danoTotal = danoRandom + atacante.getAtaque() + danoArma;
-            defensor.sofrerDano(danoTotal);
-            return danoTotal;
-        }
-
-        System.out.printf("\n%s rolou o dado D%d, tirou %d e acertou um ataque normal.\n", atacante.getNome(), dado, danoRandom);
-        int danoTotal = danoRandom + atacante.getAtaque() + danoArma - defensor.getDefesa();
-        defensor.sofrerDano(danoTotal);
-        return danoTotal;
-
-    }
 
 
 }
