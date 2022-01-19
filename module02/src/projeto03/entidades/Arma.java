@@ -1,6 +1,6 @@
 package projeto03.entidades;
 
-public class Arma {
+public abstract class Arma {
     private int ataque;
 
     public Arma(int ataque) {

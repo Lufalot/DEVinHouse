@@ -12,6 +12,7 @@ public class AppJogo {
     private static final Personagem armeiro = new Orc("Armeiro");
     private static final Personagem alquimista = new Orc("Alquimista");
     private static final Personagem lider = new Lider();
+    public static int nivelDificuldade;
 
     public static void inicio() {
         System.out.println("Seja bem vindo(a) à BATALHA FINAL!");
@@ -22,6 +23,7 @@ public class AppJogo {
         escholherGenero();
         escolherClasse();
         escolherArma();
+        escholherNivelDificuldade();
     }
 
     public static void escholherGenero() {
@@ -117,6 +119,32 @@ public class AppJogo {
         }
     }
 
+    public static void escholherNivelDificuldade() {
+        int opcao;
+        try {
+            do {
+                System.out.println("Escolha o nível de dificuldade:\n1 - Fácil | 2 - Médio | 3 - Difícil:");
+
+                opcao = keyboard.nextInt();
+                switch(opcao) {
+                    case 1:
+                        nivelDificuldade = 1;
+                        break;
+                    case 2:
+                        nivelDificuldade = 2;
+                        break;
+                    case 3:
+                        nivelDificuldade = 3;
+                        break;
+                    default:
+                        System.out.println("Opção inválida, tente novamente.");
+                }
+            } while (opcao < 1 || opcao > 3);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void escolherMotivacao() {
         System.out.println("Escolha sua motivação para invadir a caverna do inimigo e derrotá-lo:\n1 - VINGANÇA | 2 - GLÓRIA");
 
@@ -206,6 +234,7 @@ public class AppJogo {
             System.out.println("Você defendeu o ataque disparado pela armadilha.\n");
             return;
         }
+        //jogador.setVida(jogador.getVida() - danoTotal);
         jogador.sofrerDano(danoTotal);
         System.out.printf("Você sofreu %d de dano, e agora possui %d pontos de vida.\n", danoTotal, jogador.getVida());
     }
@@ -382,13 +411,14 @@ public class AppJogo {
         int opcao;
         try {
             do {
-                System.out.println("1 - Atacar | 2 - Esperar.");
+                System.out.println("1 - Avançar | 2 - Esperar.");
                 opcao = keyboard.nextInt();
                 switch(opcao) {
                     case 1:
                         Combate.combateNormal(jogador, lider);
                         break;
                     case 2:
+                        System.out.println("Você é atacado impiedosamente.");
                         Combate.combateSemIniciativa(jogador, lider);
                         break;
                     default:

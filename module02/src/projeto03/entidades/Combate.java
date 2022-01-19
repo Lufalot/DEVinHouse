@@ -1,13 +1,11 @@
 package projeto03.entidades;
 
-import projeto03.AppJogo;
-
 import java.util.Scanner;
 
 public class Combate {
     static Scanner keyboard = new Scanner(System.in);
 
-    public static int ataque(Personagem atacante, Personagem defensor, int dado, int danoAtacante) {
+    public static int ataque(Personagem atacante, Personagem defensor, int dado, int danoAtacante) { //boolean turnoInimigo
         int danoRandom = (int) Math.floor(Math.random()*dado+1);
         int danoPrimario = danoRandom + danoAtacante;
         int danoTotal = danoPrimario - defensor.getDefesa();
@@ -19,19 +17,18 @@ public class Combate {
                 System.out.printf("%s defendeu o ataque.\n", defensor.getNome());
                 danoTotal = 0;
             }
-            defensor.sofrerDano(danoTotal);
+            return defensor.sofrerDano(danoTotal);
         }
 
         //Se dado = 1, erra o alvo.
         if (danoRandom == 1) {
             System.out.printf("\n%s rolou o dado D%d, tirou %d e errou o ataque.\n", atacante.getNome(), dado, danoRandom);
-            danoTotal = 0;
+            return 0;
         }
         //Se dado = 20, ataque crítico, ignora defesa.
         if (danoRandom == 20) {
             System.out.printf("\n%s rolou o dado D%d, tirou %d e acertou um ataque crítico.\n", atacante.getNome(), dado, danoRandom);
-            defensor.sofrerDano(danoPrimario);
-            return danoPrimario;
+            return defensor.sofrerDano(danoPrimario);
         }
 
         return danoTotal;
@@ -59,6 +56,7 @@ public class Combate {
     public static void combateTurnoInimigo(Personagem jogador, Personagem inimigo) {
         //Turno inimigo
         int danoTurnoInimigo = ataque(inimigo, jogador, 20, inimigo.getAtaque());
+
         if (danoTurnoInimigo > 0) {
             if (jogador.getVida() < 1) {
                 System.out.printf("O inimigo atacou! Você sofreu %d de dano e morreu.\n", danoTurnoInimigo);
