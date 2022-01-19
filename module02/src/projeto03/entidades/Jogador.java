@@ -1,6 +1,6 @@
 package projeto03.entidades;
 
-public class Personagem {
+public abstract class Personagem {
     private String nome;
     private Genero sexo;
     private int vida, ataque, defesa;
