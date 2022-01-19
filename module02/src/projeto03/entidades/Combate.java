@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Combate {
     static Scanner keyboard = new Scanner(System.in);
 
-    public static int ataque(Personagem atacante, Personagem defensor, int dado, int danoAtacante) { //boolean turnoInimigo
+    public static int ataque(Personagem atacante, Personagem defensor, int dado, int danoAtacante) {
         int danoRandom = (int) Math.floor(Math.random()*dado+1);
         int danoPrimario = danoRandom + danoAtacante;
         int danoTotal = danoPrimario - defensor.getDefesa();

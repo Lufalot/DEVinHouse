@@ -234,7 +234,6 @@ public class AppJogo {
             System.out.println("Você defendeu o ataque disparado pela armadilha.\n");
             return;
         }
-        //jogador.setVida(jogador.getVida() - danoTotal);
         jogador.sofrerDano(danoTotal);
         System.out.printf("Você sofreu %d de dano, e agora possui %d pontos de vida.\n", danoTotal, jogador.getVida());
     }
